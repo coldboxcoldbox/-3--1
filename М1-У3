@@ -1,0 +1,20 @@
+from flask import Flask
+import random
+app = Flask(__name__)
+random1 = ["орёл", "решка"]
+facts_list = ["Ежи не имеют тех. зависимости", "Тех. зависимость - проблема человека, а не технологии", "человек сам-же делает технологии, сами технологии ни в чём не виноваты"]
+@app.route("/")
+@app.route("/main")
+def main():
+    return f'<p>По этой ссылке вы можете узнать несколько занимательных фактов о тех. зависимости! <a href="/fact">Ссылка</a></p>''<p> А в этой ссылке бросок монеты! <a href="/rndm">Ссылка</a></p>'
+
+@app.route("/fact")
+def fact():
+    return f'<p>{random.choice(facts_list)}</p>'
+
+@app.route("/rndm")
+def rndm():
+    coin = random.choice(random1)
+    return f'<p>{coin}</p>'
+
+app.run(debug=True)
